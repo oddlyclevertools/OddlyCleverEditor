@@ -1,0 +1,21 @@
+{
+  "description": "Bounce: words spring in one by one as they're spoken, the newest in green.",
+  "font": "Archivo Black",
+  "size": 0.088,
+  "uppercase": true,
+  "strip_punct": true,
+  "color": "#FFFFFF",
+  "highlight": "#3BFF8A",
+  "highlight_scale": 1.0,
+  "outline_color": "#000000",
+  "outline": 0.1,
+  "shadow": 0.05,
+  "shadow_color": "#000000B0",
+  "position": "bottom",
+  "margin_v": 0.25,
+  "effect": "bounce",
+  "reveal": true,
+  "accent": "#FFE14D",
+  "char_width": 0.76,
+  "chunk": {"max_words": 3, "max_chars": 20, "max_duration": 2.0, "max_gap": 0.45, "soft_break_min_words": 2, "min_duration": 0.4, "max_line_chars": 13}
+}

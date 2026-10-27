@@ -1,0 +1,21 @@
+{
+  "description": "Marker: hand-drawn marker letters; the spoken word turns orange.",
+  "font": "Permanent Marker",
+  "size": 0.08,
+  "uppercase": true,
+  "strip_punct": true,
+  "color": "#FFFFFF",
+  "highlight": "#FF9F1C",
+  "highlight_scale": 1.06,
+  "outline_color": "#000000",
+  "outline": 0.1,
+  "shadow": 0.05,
+  "shadow_color": "#000000B0",
+  "position": "bottom",
+  "margin_v": 0.24,
+  "pop_in": true,
+  "tilt": -2,
+  "accent": "#7FE3FF",
+  "char_width": 0.7,
+  "chunk": {"max_words": 3, "max_chars": 22, "max_duration": 2.0, "max_gap": 0.45, "soft_break_min_words": 2, "min_duration": 0.4, "max_line_chars": 15}
+}

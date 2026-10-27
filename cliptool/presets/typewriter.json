@@ -1,0 +1,22 @@
+{
+  "description": "Typewriter: letters type out on a dark box as each word is spoken.",
+  "font": "Poppins ExtraBold",
+  "size": 0.068,
+  "uppercase": false,
+  "strip_punct": false,
+  "color": "#FFFFFF",
+  "highlight": null,
+  "outline_color": "#000000",
+  "outline": 0.0,
+  "shadow": 0.0,
+  "shadow_color": "#00000000",
+  "box": true,
+  "box_color": "#000000C8",
+  "box_padding": 0.3,
+  "position": "bottom",
+  "margin_v": 0.22,
+  "effect": "typewriter",
+  "accent": "#FFD23F",
+  "char_width": 0.6,
+  "chunk": {"max_words": 6, "max_chars": 36, "max_duration": 3.0, "max_gap": 0.6, "soft_break_min_words": 3, "min_duration": 0.6, "max_line_chars": 20}
+}

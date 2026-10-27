@@ -1,0 +1,18 @@
+{
+  "description": "Karaoke: a yellow fill sweeps through each word as it's spoken.",
+  "font": "Montserrat Black",
+  "size": 0.085,
+  "uppercase": true,
+  "strip_punct": true,
+  "color": "#FFFFFF",
+  "highlight": "#FFE14D",
+  "outline_color": "#000000",
+  "outline": 0.09,
+  "shadow": 0.04,
+  "shadow_color": "#000000B0",
+  "position": "bottom",
+  "margin_v": 0.24,
+  "effect": "karaoke",
+  "accent": "#7FE3FF",
+  "chunk": {"max_words": 4, "max_chars": 26, "max_duration": 2.4, "max_gap": 0.45, "soft_break_min_words": 2, "min_duration": 0.5, "max_line_chars": 16}
+}

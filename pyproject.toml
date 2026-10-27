@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cliptool"
+version = "0.4.0"
+description = "Local, free GPU captions and 9:16 Shorts for video creators."
+readme = "README.md"
+license = "GPL-3.0-or-later"
+requires-python = ">=3.10"
+dependencies = [
+    "faster-whisper>=1.2",
+    "numpy",
+    "opencv-python-headless>=4.8",
+    "nvidia-cublas-cu12; sys_platform == 'win32' or sys_platform == 'linux'",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+oddlyclever = "cliptool.cli:main"
+cliptool = "cliptool.cli:main"
+
+[tool.setuptools]
+packages = ["cliptool", "cliptool.ui"]
+
+[tool.setuptools.package-data]
+cliptool = ["presets/*.json", "fonts/*.ttf", "fonts/*.txt", "models/*.onnx", "models/*.txt", "ui/static/*"]

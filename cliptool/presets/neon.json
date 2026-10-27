@@ -1,0 +1,22 @@
+{
+  "description": "Neon: tall glowing letters with a cyan halo; the spoken word glows pink.",
+  "font": "Bebas Neue",
+  "size": 0.11,
+  "uppercase": true,
+  "strip_punct": true,
+  "color": "#F4FDFF",
+  "highlight": "#FF4FD8",
+  "highlight_scale": 1.06,
+  "outline_color": "#05303A",
+  "outline": 0.04,
+  "shadow": 0.0,
+  "shadow_color": "#00000000",
+  "position": "bottom",
+  "margin_v": 0.24,
+  "pop_in": true,
+  "glow": 0.28,
+  "glow_color": "#00E5FF",
+  "accent": "#FFF36B",
+  "char_width": 0.42,
+  "chunk": {"max_words": 3, "max_chars": 24, "max_duration": 2.0, "max_gap": 0.45, "soft_break_min_words": 2, "min_duration": 0.4, "max_line_chars": 16}
+}

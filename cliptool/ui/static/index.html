@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="cliptool-token" content="{{TOKEN}}">
+<title>OddlyCleverEditor</title>
+<link rel="icon" href="/static/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/app.css">
+<script type="module" src="/static/app.js"></script>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<header class="top">
+  <button class="brand" id="home-link" type="button" aria-label="All projects">
+    <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+      <defs>
+        <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#ffe14d"/><stop offset="1" stop-color="#ff5a8a"/>
+        </linearGradient>
+      </defs>
+      <rect x="2" y="2" width="28" height="28" rx="8" fill="url(#lg)"/>
+      <path d="M12 9.5v9l7.5-4.5z" fill="#14121a"/>
+      <rect x="8" y="21.5" width="16" height="3.2" rx="1.6" fill="#14121a"/>
+    </svg>
+    <span class="brand-name">OddlyCleverEditor</span> <span class="ver">v{{VERSION}}</span>
+  </button>
+  <div class="jobbar" id="jobbar" hidden>
+    <span class="spinner" aria-hidden="true"></span>
+    <span class="job-msg" id="job-msg">Working…</span>
+    <div class="bar"><div class="bar-fill" id="job-fill"></div></div>
+    <span class="job-pct" id="job-pct">0%</span>
+    <span class="job-eta muted" id="job-eta"></span>
+    <button class="btn small ghost" id="job-cancel" type="button">Cancel</button>
+  </div>
+  <span class="gpu-note"><span class="dot" aria-hidden="true"></span>Runs on your GPU · nothing leaves this PC</span>
+</header>
+
+<main>
+  <!-- Home -->
+  <section id="view-home" class="view">
+    <div class="hero">
+      <h1 class="hero-title">Captions and Shorts, <span class="grad">made on your GPU.</span></h1>
+      <p class="muted">Free, offline, open source. Drop a video to transcribe it, style the captions, and cut it into Shorts.</p>
+    </div>
+    <div class="drop" id="drop" tabindex="0">
+      <div class="drop-art" aria-hidden="true">
+        <svg viewBox="0 0 64 64"><rect x="10" y="14" width="44" height="34" rx="6"/><path d="M28 24v14l11-7z"/>
+          <path class="arrow" d="M32 6v14m-6-6 6 6 6-6"/></svg>
+      </div>
+      <p class="drop-title">Drop a video here</p>
+      <p class="muted">MP4, MOV, MKV, WebM, or audio. It's copied into your workspace.</p>
+      <label class="btn primary">Choose a file<input type="file" id="file-input" accept="video/*,audio/*" hidden></label>
+      <div class="upload" id="upload" hidden>
+        <svg class="ring" viewBox="0 0 44 44" aria-hidden="true">
+          <circle class="ring-bg" cx="22" cy="22" r="19"/><circle class="ring-fg" id="upload-ring" cx="22" cy="22" r="19"/>
+        </svg>
+        <span id="upload-msg" class="muted"></span>
+      </div>
+    </div>
+    <form class="open-path" id="open-path">
+      <label for="path-input" class="muted">Or open a file where it is, without copying it</label>
+      <div class="row">
+        <input id="path-input" type="text" placeholder="C:\Videos\my episode.mp4" autocomplete="off" spellcheck="false">
+        <button class="btn" type="submit">Open</button>
+      </div>
+    </form>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects" id="projects"></div>
+    <p class="muted small" id="workspace-note"></p>
+  </section>
+
+  <!-- Project -->
+  <section id="view-project" class="view" hidden>
+    <div class="proj-head">
+      <button class="btn ghost" id="back" type="button">← Projects</button>
+      <h1 id="proj-name"></h1>
+      <nav class="tabs" role="tablist">
+        <span class="tab-pill" id="tab-pill" aria-hidden="true"></span>
+        <button role="tab" data-tab="captions" aria-selected="true" type="button">Captions</button>
+        <button role="tab" data-tab="clips" aria-selected="false" type="button">Clips</button>
+      </nav>
+      <button class="btn ai-btn" id="ai-open" type="button"><span class="spark" aria-hidden="true">✦</span> AI</button>
+      <button class="btn ghost" id="reveal" type="button">Open folder</button>
+    </div>
+
+    <div class="workspace">
+      <div class="stage">
+        <div class="player" id="player">
+          <video id="video" controls preload="metadata" playsinline></video>
+          <div class="overlay" id="overlay" aria-hidden="true"></div>
+        </div>
+        <div class="timeline" id="timeline" title="Click to jump">
+          <canvas id="wave"></canvas>
+          <div class="spans" id="spans"></div>
+          <div class="playhead" id="playhead"></div>
+          <div class="hover-time" id="hover-time" hidden></div>
+        </div>
+        <div class="player-info muted small" id="player-info"></div>
+      </div>
+
+      <div class="side">
+        <!-- Captions tab -->
+        <div id="tab-captions" class="tab">
+          <div id="cap-empty" class="card glass" hidden>
+            <h2>Transcribe</h2>
+            <p class="muted">Whisper large-v3-turbo runs on your GPU. A 17-minute video takes about 30 seconds.</p>
+            <label class="field">Language
+              <input id="tx-language" type="text" placeholder="auto-detect (or e.g. en)">
+            </label>
+            <label class="field">Names and rare words <span class="muted">(optional)</span>
+              <input id="tx-prompt" type="text" placeholder="Callum, Londinium, Boudicca">
+            </label>
+            <label class="field">Fix recurring mistakes <span class="muted">(optional, one per line)</span>
+              <textarea id="tx-replace" rows="2" placeholder="Callan=Callum"></textarea>
+            </label>
+            <button class="btn primary" id="tx-go" type="button">Transcribe</button>
+          </div>
+
+          <div id="cap-editor" hidden>
+            <div class="gallery-head">
+              <h2>Caption style</h2>
+              <label class="inline">Emphasis
+                <select id="emphasis" title="Colour numbers and names">
+                  <option value="auto">style's choice</option><option value="on">on</option><option value="off">off</option>
+                </select>
+              </label>
+              <select id="style-select" class="sr-only" aria-label="Caption style"></select>
+            </div>
+            <div class="gallery" id="gallery" role="listbox" aria-label="Caption styles"></div>
+            <div class="toolbar">
+              <button class="btn primary" id="burn" type="button">Burn captions</button>
+              <span class="downloads" id="downloads"></span>
+            </div>
+            <div class="toolbar">
+              <input id="find-text" type="text" placeholder="Find (e.g. Callan)" aria-label="Find">
+              <input id="replace-text" type="text" placeholder="Replace with" aria-label="Replace with">
+              <button class="btn" id="replace-all" type="button">Replace all</button>
+              <span class="spacer"></span>
+              <span class="dirty" id="dirty" hidden>Unsaved edits</span>
+              <button class="btn primary" id="save" type="button" disabled>Save</button>
+            </div>
+            <div class="row hint-row">
+              <p class="muted small">Click a word to jump there. Double-click a line to edit it. Edits keep the timing.</p>
+              <button class="btn ghost small" id="ai-fixes" type="button"><span class="spark" aria-hidden="true">✦</span> Find mistakes with AI</button>
+            </div>
+            <div class="lines" id="lines"></div>
+          </div>
+        </div>
+
+        <!-- Clips tab -->
+        <div id="tab-clips" class="tab" hidden>
+          <div id="clips-needs-transcript" class="card glass" hidden>
+            <p>Transcribe the video first (Captions tab), then find clips here.</p>
+          </div>
+          <div id="clips-body">
+            <div class="toolbar">
+              <label class="inline">Length
+                <input id="min-len" type="number" min="3" max="170" value="20" step="1" aria-label="Shortest, seconds"> –
+                <input id="max-len" type="number" min="5" max="180" value="60" step="1" aria-label="Longest, seconds"> s
+              </label>
+              <button class="btn primary" id="find" type="button">Find clips</button>
+            </div>
+
+            <div class="card glass judge" id="judge">
+              <div>
+                <b>Let an AI pick the best ones</b> <span class="muted">(recommended)</span>
+                <div class="muted small">Any AI you like: Claude Code, a chat app, a local model or a cloud API. It can also write hook titles.</div>
+              </div>
+              <div class="row">
+                <button class="btn" id="ai-pick" type="button"><span class="spark" aria-hidden="true">✦</span> Pick with AI</button>
+                <button class="btn ghost" id="ai-titles" type="button">Write hook titles</button>
+              </div>
+            </div>
+
+            <div class="cands" id="cands"></div>
+
+            <div class="render-bar" id="render-bar" hidden>
+              <div class="phone" id="phone" aria-hidden="true">
+                <div class="phone-bg" id="phone-bg"></div>
+                <div class="phone-title" id="phone-title"></div>
+                <div class="phone-cap" id="phone-cap"></div>
+              </div>
+              <div class="render-opts">
+                <label class="inline">Frame
+                  <select id="layout-select">
+                    <option value="auto">Auto (follow faces, else fit)</option>
+                    <option value="crop">Crop: follow faces</option>
+                    <option value="fit">Fit: whole frame on blur</option>
+                  </select>
+                </label>
+                <label class="inline">Captions <select id="clip-style"></select></label>
+                <label class="inline">Hook title <select id="title-look"></select></label>
+                <label class="inline">for <input id="title-secs" type="number" min="0" max="60" step="0.5" value="3.5"> s
+                  <span class="small">(0 = whole clip)</span></label>
+                <label class="inline">Emphasis
+                  <select id="clip-emphasis"><option value="auto">style's choice</option><option value="on">on</option><option value="off">off</option></select>
+                </label>
+                <button class="btn primary big" id="render" type="button">Render 0 clips</button>
+              </div>
+            </div>
+
+            <h2 class="section-title" id="rendered-title" hidden>Rendered Shorts</h2>
+            <div class="rendered" id="rendered"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="ai-backdrop" id="ai-backdrop" hidden></div>
+<aside class="drawer" id="ai-drawer" hidden aria-label="AI assistant">
+  <div class="drawer-head">
+    <h2><span class="spark" aria-hidden="true">✦</span> AI assistant</h2>
+    <button class="btn ghost small" id="ai-close" type="button" aria-label="Close">✕</button>
+  </div>
+  <p class="muted small">Use any AI you like. Nothing is sent anywhere unless you press <b>Ask my AI</b>.</p>
+
+  <section class="drawer-sec">
+    <h3>1. Your AI</h3>
+    <label class="field">Provider <select id="ai-provider"></select></label>
+    <label class="field">Address <input id="ai-url" type="text" spellcheck="false" autocomplete="off"></label>
+    <label class="field">Model <input id="ai-model" type="text" spellcheck="false" autocomplete="off"></label>
+    <label class="field" id="ai-key-row">API key <span class="muted small">(kept in this tab's memory only, never saved)</span>
+      <input id="ai-key" type="password" spellcheck="false" autocomplete="off" placeholder="paste your key">
+    </label>
+    <p class="ai-privacy small" id="ai-privacy"></p>
+  </section>
+
+  <section class="drawer-sec">
+    <h3>2. The job</h3>
+    <div class="ai-tasks" id="ai-tasks"></div>
+    <label class="inline" id="ai-count-row">how many clips <input id="ai-count" type="number" min="1" max="20" value="5"></label>
+  </section>
+
+  <section class="drawer-sec">
+    <h3>3. Run it</h3>
+    <div class="row">
+      <button class="btn primary" id="ai-ask" type="button">✦ Ask my AI</button>
+      <button class="btn" id="ai-copy" type="button" title="Paste it into any chat AI">Copy prompt</button>
+      <button class="btn" id="ai-agent" type="button" title="A one-line instruction for Claude Code or another agent">Copy for Claude Code</button>
+    </div>
+    <textarea id="ai-prompt-box" rows="3" readonly hidden aria-label="Prompt"></textarea>
+    <textarea id="ai-reply" rows="3" aria-label="The AI's reply"></textarea>
+    <div class="row">
+      <button class="btn" id="ai-apply" type="button">Apply reply</button>
+      <button class="btn ghost" id="ai-load" type="button" title="Read the reply file an agent saved in the project folder">Load reply file</button>
+    </div>
+    <div class="ai-results" id="ai-results"></div>
+  </section>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

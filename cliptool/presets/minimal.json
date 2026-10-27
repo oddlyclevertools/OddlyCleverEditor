@@ -1,0 +1,19 @@
+{
+  "description": "Classic subtitles: up to two lines, white with a thin outline, no highlight.",
+  "font": "Montserrat SemiBold",
+  "size": 0.05,
+  "uppercase": false,
+  "strip_punct": false,
+  "color": "#FFFFFF",
+  "highlight": null,
+  "highlight_scale": 1.0,
+  "outline_color": "#000000",
+  "outline": 0.06,
+  "shadow": 0.03,
+  "shadow_color": "#00000080",
+  "box": false,
+  "position": "bottom",
+  "margin_v": 0.06,
+  "pop_in": false,
+  "chunk": {"max_words": 14, "max_chars": 84, "max_duration": 6.0, "max_gap": 0.7, "soft_break_min_words": 6, "min_duration": 0.8, "max_line_chars": 42}
+}

@@ -1,0 +1,15 @@
+.venv/
+_scratch/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+*.partial.*
+installer/_cache/
+installer/_stage/
+installer/dist/
+build/
+.ruff_cache/
+*.log
+# local planning notes, not part of the project
+PLAN.md
+PLAN_v*.md

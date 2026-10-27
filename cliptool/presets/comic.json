@@ -1,0 +1,21 @@
+{
+  "description": "Comic: tilted yellow comic-book letters that punch in word by word.",
+  "font": "Bangers",
+  "size": 0.11,
+  "uppercase": true,
+  "strip_punct": true,
+  "color": "#FFE14D",
+  "highlight": "#FFFFFF",
+  "highlight_scale": 1.1,
+  "outline_color": "#000000",
+  "outline": 0.12,
+  "shadow": 0.07,
+  "shadow_color": "#000000FF",
+  "position": "bottom",
+  "margin_v": 0.25,
+  "effect": "bounce",
+  "tilt": -4,
+  "accent": "#FF5A36",
+  "char_width": 0.5,
+  "chunk": {"max_words": 3, "max_chars": 22, "max_duration": 2.0, "max_gap": 0.45, "soft_break_min_words": 2, "min_duration": 0.4, "max_line_chars": 16}
+}

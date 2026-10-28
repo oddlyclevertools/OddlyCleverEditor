@@ -2,6 +2,10 @@
 
 Free, local captions and Shorts for video creators. It runs on your own NVIDIA GPU, keeps your video offline, and has no subscription, credits or watermark.
 
+[![Buy me a tea on Ko-fi](https://img.shields.io/badge/Buy%20me%20a%20tea-Ko--fi-ff2e7e?logo=kofi&logoColor=white)](https://ko-fi.com/oddlyclevertools)
+
+It's free forever. If it saves you time, you can buy me a tea.
+
 ```
 oddlyclever caption my_video.mp4 --style bold
 ```

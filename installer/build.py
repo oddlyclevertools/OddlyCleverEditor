@@ -168,7 +168,7 @@ goto :eof
 def stage_docs() -> None:
     step("Launcher, icon and licences")
     (STAGE / "oddlyclever.cmd").write_text(LAUNCHER.replace("{version}", __version__), encoding="ascii")
-    for name in ("LICENSE", "LICENSE-ADDITIONAL-PERMISSION.txt", "THIRD_PARTY.md", "README.md"):
+    for name in ("LICENSE", "TRADEMARKS.md", "THIRD_PARTY.md", "README.md"):
         shutil.copy2(ROOT / name, STAGE / name)
     make_icon()
 

@@ -7,7 +7,7 @@ name = "cliptool"
 version = "0.4.0"
 description = "Local, free GPU captions and 9:16 Shorts for video creators."
 readme = "README.md"
-license = "GPL-3.0-or-later"
+license = "MIT"
 requires-python = ">=3.10"
 dependencies = [
     "faster-whisper>=1.2",

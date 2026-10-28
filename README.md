@@ -260,6 +260,6 @@ On an NVIDIA GPU the tests also burn every style for real, render 9:16 crop and 
 
 ## Licence
 
-GPL-3.0-or-later, with an additional permission for linking the NVIDIA CUDA libraries (`LICENSE-ADDITIONAL-PERMISSION.txt`). See `LICENSE`. The bundled fonts are SIL OFL 1.1 (Permanent Marker is Apache-2.0). The Whisper weights and the bundled YuNet face model are MIT. Full list and notes: [THIRD_PARTY.md](THIRD_PARTY.md).
+MIT: use it for anything, paid work included. See `LICENSE`. Versions up to 0.4.0 were released under GPL-3.0. The name, logo and characters aren't covered by the licence: see [TRADEMARKS.md](TRADEMARKS.md). The bundled fonts are SIL OFL 1.1 (Permanent Marker is Apache-2.0). The Whisper weights and the bundled YuNet face model are MIT. Full list and notes: [THIRD_PARTY.md](THIRD_PARTY.md).
 
 Not affiliated with Descript, Opus Clip, Submagic or OpenAI.

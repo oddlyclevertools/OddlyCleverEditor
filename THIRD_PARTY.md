@@ -1,6 +1,6 @@
 # Third-party components and licences
 
-OddlyCleverEditor's own code is GPL-3.0-or-later (see `LICENSE`). It also carries an additional permission under GPLv3 section 7 for linking with the NVIDIA CUDA libraries (see `LICENSE-ADDITIONAL-PERMISSION.txt`). Checked 27 Oct 2026; re-checked for v0.4 the same day.
+OddlyCleverEditor's own code is MIT (see `LICENSE`) since 28 Oct 2026; versions up to 0.4.0 were GPL-3.0-or-later. Checked 27 Oct 2026; re-checked for v0.4 the same day.
 
 ## Bundled in the source folder
 
@@ -53,6 +53,6 @@ OddlyCleverEditor bundles no AI model and no provider SDK. The AI panel and `--j
 ## Still to watch
 
 - **Trademarks.** Never use Descript's, Opus Clip's or Submagic's names, logos or UI text in the product. Comparisons in the README must stay factual.
-- **Inno Setup's commercial terms.** The bundled `license.txt` allows any use. The 6.7.3 compiler still prints "Non-commercial use only", matching the newer paid commercial licence on jrsoftware.org. A free GPL tool is non-commercial, so nothing is needed now. If cliptool is ever sold or built for a business, buy the commercial licence or switch to WiX/NSIS.
+- **Inno Setup's commercial terms.** The bundled `license.txt` allows any use. The 6.7.3 compiler still prints "Non-commercial use only", matching the newer paid commercial licence on jrsoftware.org. Giving the installer away free is non-commercial, so nothing is needed now. If we ever sell it or build it for a business, buy the commercial licence or switch to WiX/NSIS.
 - **Provider names in the AI list.** They are plain-text labels next to public API addresses, with no logos. Keep them that way, and don't imply any partnership.
 - **A future cuDNN or cuBLAS version.** Re-read NVIDIA's terms when the CUDA wheels change major version.
